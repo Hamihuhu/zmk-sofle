@@ -10,15 +10,6 @@
 
 / {
     behaviors {
-        tap_dance_sym_backspace: tap_dance_sym_backspace {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TAP_DANCE_SYM_BACKSPACE";
-            #binding-cells = <0>;
-            bindings = <&ht_sym_bksp 2 BACKSPACE>, <&kp BACKSPACE>;
-
-            tapping-term-ms = <130>;
-        };
-
         hrl: hrl {
             compatible = "zmk,behavior-hold-tap";
             label = "HRL";
@@ -45,14 +36,15 @@
             hold-trigger-key-positions = <28 27 26 25 0 1 2 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 42 50 51 52 53 54>;
         };
 
-        ht_sym_bksp: ht_sym_bksp {
+        HT_sym_backspace: HT_sym_backspace {
             compatible = "zmk,behavior-hold-tap";
-            label = "HT_SYM_BKSP";
+            label = "HT_SYM_BACKSPACE";
             bindings = <&mo>, <&kp>;
 
             #binding-cells = <2>;
+            tapping-term-ms = <175>;
+            quick-tap-ms = <150>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
         };
     };
 
@@ -70,11 +62,11 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp ESC              &kp N1           &kp N2           &kp N3        &kp N4             &kp N5                                      &kp N6                    &kp N7             &kp N8        &kp N9           &kp N0              &kp MINUS
-&mt LEFT_ALT ESCAPE  &kp Q            &kp W            &kp E         &kp R              &kp T                                       &kp Y                     &kp U              &kp I         &kp O            &kp P               &kp BSPC
-&mt LEFT_WIN TAB     &hrl LEFT_GUI A  &hrl LEFT_ALT S  &hrl LCTRL D  &hrl LEFT_SHIFT F  &kp G                                       &kp H                     &hrr LEFT_SHIFT J  &hrr LCTRL K  &hrr LEFT_ALT L  &hrr LEFT_GUI SEMI  &kp SQT
-&kp LSHFT            &kp Z            &kp X            &kp C         &kp V              &kp B            &kp C_MUTE    &kp C_MUTE   &kp N                     &kp M              &kp COMMA     &kp DOT          &kp FSLH            &kp RSHFT
-                                      &kp LGUI         &kp LALT      &kp LCTRL          &lt 1 BACKSPACE  &kp ENTER     &lt 3 SPACE  &tap_dance_sym_backspace  &mo 4              &kp RALT      &kp RGUI
+&kp ESC              &kp N1           &kp N2           &kp N3        &kp N4             &kp N5                                      &kp N6                         &kp N7             &kp N8        &kp N9           &kp N0              &kp MINUS
+&mt LEFT_ALT ESCAPE  &kp Q            &kp W            &kp E         &kp R              &kp T                                       &kp Y                          &kp U              &kp I         &kp O            &kp P               &kp BSPC
+&mt LEFT_WIN TAB     &hrl LEFT_GUI A  &hrl LEFT_ALT S  &hrl LCTRL D  &hrl LEFT_SHIFT F  &kp G                                       &kp H                          &hrr LEFT_SHIFT J  &hrr LCTRL K  &hrr LEFT_ALT L  &hrr LEFT_GUI SEMI  &kp SQT
+&kp LSHFT            &kp Z            &kp X            &kp C         &kp V              &kp B            &kp C_MUTE    &kp C_MUTE   &kp N                          &kp M              &kp COMMA     &kp DOT          &kp FSLH            &kp RSHFT
+                                      &kp LGUI         &kp LALT      &kp LCTRL          &lt 1 BACKSPACE  &kp ENTER     &lt 3 SPACE  &HT_sym_backspace 2 BACKSPACE  &mo 4              &kp RALT      &kp RGUI
             >;
 
             sensor-bindings =
@@ -93,11 +85,11 @@
             //               |     |      |      |      |        |  |       |      |       |       |      |
 
             bindings = <
-&kp GRAVE      &trans    &trans  &trans  &trans  &trans                       &trans  &trans  &trans  &trans  &trans  &trans
-&kp BACKSPACE  &kp FSLH  &kp N9  &kp N8  &kp N7  &kp MINUS                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &kp N0    &kp N6  &kp N5  &kp N4  &kp PLUS                     &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &trans    &kp N3  &kp N2  &kp N1  &kp EQUAL  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                         &trans  &trans  &trans  &trans     &trans    &trans  &trans  &trans  &trans  &trans
+&kp GRAVE      &trans    &trans  &trans  &trans  &trans                       &trans  &trans     &trans     &trans    &trans    &trans
+&kp BACKSPACE  &kp FSLH  &kp N9  &kp N8  &kp N7  &kp MINUS                    &trans  &trans     &trans     &trans    &trans    &trans
+&trans         &kp N0    &kp N6  &kp N5  &kp N4  &kp PLUS                     &trans  &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &trans
+&trans         &trans    &kp N3  &kp N2  &kp N1  &kp EQUAL  &trans    &trans  &trans  &trans     &trans     &trans    &trans    &trans
+                         &trans  &trans  &trans  &trans     &trans    &trans  &trans  &trans     &trans     &trans
             >;
         };
 
@@ -109,16 +101,20 @@
 &trans  &trans  &kp HASH              &kp AT        &kp EXCL    &kp BACKSLASH     &trans    &trans  &kp PIPE           &kp PLUS       &kp QUESTION    &kp SLASH              &trans  &trans
                 &trans                &trans        &trans      &trans            &trans    &trans  &trans             &trans         &trans          &trans
             >;
+
+            label = "SYM";
         };
 
         nav_layer {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans          &trans          &trans        &trans           &trans   &trans
-&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5                    &kp F6          &kp F7          &kp F8        &kp F9           &kp F10  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans   &kp F12
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans        &trans           &trans   &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans        &trans
+&trans  &trans    &trans    &trans     &trans     &trans                    &trans          &trans          &trans        &trans           &trans   &trans
+&trans  &kp F1    &kp F2    &kp F3     &kp F4     &kp F5                    &kp F6          &kp F7          &kp F8        &kp F9           &kp F10  &kp F11
+&trans  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &trans                    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans   &kp F12
+&trans  &trans    &trans    &trans     &trans     &trans  &trans    &trans  &trans          &trans          &trans        &trans           &trans   &trans
+                  &trans    &trans     &trans     &trans  &trans    &trans  &trans          &trans          &trans        &trans
             >;
+
+            label = "NAV";
         };
 
         media_layer {
@@ -129,6 +125,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans          &trans            &trans      &trans           &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans          &trans            &trans
             >;
+
+            label = "MED";
         };
 
         adjust_layer {
@@ -140,6 +138,18 @@
 &trans      &trans        &trans        &trans        &trans        &trans        &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
                           &trans        &trans        &trans        &trans        &trans    &trans  &trans  &trans  &trans  &trans
             >;
+        };
+
+        game_layer {
+            bindings = <
+&kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp ESC    &kp Q   &kp W     &kp E     &kp R      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSPC
+&kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp APOS
+&kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &trans       &trans     &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 1   &kp ENTER    &kp SPACE  &mo 2   &kp LCTRL  &kp LALT   &kp LGUI
+            >;
+
+            label = "GAME";
         };
     };
 
