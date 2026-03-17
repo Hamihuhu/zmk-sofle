@@ -154,11 +154,11 @@
 
         game_test_layer {
             bindings = <
-&trans  &trans          &trans  &trans     &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans          &trans  &trans     &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp LEFT_ARROW  &trans  &kp RIGHT  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans          &trans  &trans     &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans     &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&none  &none           &none  &none      &none  &none                      &none  &none  &none  &none  &none  &none
+&none  &kp Q           &kp W  &kp E      &kp R  &kp T                      &kp Y  &none  &none  &none  &none  &none
+&none  &kp LEFT_ARROW  &none  &kp RIGHT  &none  &none                      &none  &none  &none  &none  &none  &none
+&none  &none           &none  &none      &none  &none  &none        &none  &none  &none  &none  &none  &none  &none
+                       &none  &none      &none  &none  &kp SPACE    &none  &none  &none  &none  &none
             >;
 
             label = "TEST";
